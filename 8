@@ -1,0 +1,132 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct employee
+{
+  char name[15],ssn[15],dept[15],des[15],sal[15],phone[15];
+  struct employee *llink,*rlink;
+};
+typedef struct employee *NODE;
+
+main( )
+{
+ NODE first=NULL,temp,cur,prev;
+ int choice,c;
+   while(1)
+       {
+     printf("\n Operations of Doubly linked list \n");
+     printf(" \n 1:insert front\n 2:insert rear \n 3:delete front\n 4:delete rear \n
+                      5:display\n 6:exit \n");
+     printf("\n Enter your choice \n");
+     scanf("%d",&choice);
+          switch(choice)
+                  {
+        case 1:temp=(NODE)malloc(sizeof(struct employee));
+                    printf("\n Enter name,ssn,dept,designation,salary and
+                                phone no \n");
+                    scanf("%s%s%s%s%s%s",&temp->name,&temp->ssn,
+                               &temp->dept,&temp->des,&temp->sal,
+                               &temp->phone);
+                    temp->llink=temp->rlink=NULL;
+                   if(first==NULL)
+                         {
+                           first=temp;
+                           break;
+                         }
+                   temp->rlink=first;
+                   first->llink=temp;
+                   first=temp;
+                   break;
+
+        case 2:temp=(NODE)malloc(sizeof(struct employee));
+                   printf("\n Enter name,ssn,dept,designation,salary and
+                              phone no \n");
+               scanf("%s %s %s %s %s %s",&temp->name,&temp->ssn,
+                          &temp->dept,&temp->des,&temp->sal,
+                          &temp->phone);
+               temp->llink=temp->rlink=NULL;
+               if(first==NULL)
+               {
+                first=temp;
+                break;
+               }
+                cur=first;
+                while(cur->rlink!=NULL)
+                cur=cur->rlink;
+                
+                cur->rlink=temp;
+                temp->llink=cur;
+                break;
+
+     case 3:if(first==NULL)
+               {
+                printf("\n List is empty \n");
+                break;
+               }
+               temp=first;
+               printf("\n First node in the list is deleted\n");
+               first=first->rlink;
+               first->llink=NULL;
+               free(temp);
+               break;
+
+       case 4:if(first==NULL)
+               {
+                printf("\n List is empty \n");
+                break;
+               }
+               if(first->rlink==NULL)
+               {
+                printf("\n List contains only one node, that is deleted\n");
+                first=NULL;
+                break;
+               }
+
+             
+
+
+
+              prev=NULL;
+               cur=first;              
+
+          while(cur->rlink!=NULL)
+                {
+                  prev=cur;
+                  cur=cur->rlink;
+                }  
+               prev->rlink=NULL;
+               printf("\n Last node in the list is deleted\n");
+               free(cur);
+               break;
+              
+    case 5:c=0;
+               if(first==NULL)
+               {
+                printf("\n list is empty \n");
+                break;
+               }
+               
+               printf("\n The contents of linked list are \n");
+               printf("Name    \t\tSSN\t\t\tDept\t\tDesignation\t\t
+                           Sal\t\t   phone no \n");
+               printf(".......................................................................\n");
+               temp=first;
+               while(temp!=NULL)
+               {
+                printf("%-20s %-20s %-20s %-20s %-20s %-20s",
+                temp->name, temp->ssn,temp->dept,temp->des,
+                temp->sal,temp->phone);
+                printf("\n");
+                temp=temp->rlink;
+                c++;
+               }
+               printf("\n");
+               printf("\n Number of Employeess= %d \n",c);
+               break;
+                         case 6:exit(0);
+                 }
+       }
+}
+
+
+
