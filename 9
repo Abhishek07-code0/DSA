@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct student
+{
+  char name[15],sem[15],usn[15],branch[15],phone[15];
+  struct student *link;
+};
+typedef struct student *NODE;
+
+main( )
+{
+ NODE first=NULL,temp,cur,prev;
+ int choice,c;
+ 
+    while(1)
+          {
+     printf("\n Operations of Singly linked list \n");
+     printf(" \n 1:insert front\n 2:insert rear \n 3:delete front\n 
+                      4:delete rear \n 5:display\n 6:exit \n");
+     printf("\n Enter your choice \n");
+     scanf("%d",&choice);
+          switch(choice)
+                    {
+                          case 1:temp=(NODE)malloc(sizeof(struct student));
+printf("\n Enter name,sem,usn,branch and phone no \n");
+scanf("%s %s %s %s %s",&temp->name,&temp->sem,                     
+            &temp->usn,&temp->branch,&temp->phone); 
+               
+                                      temp->link=first;
+                                      first=temp;
+                                      break;
+
+                          case 2:temp=(NODE)malloc(sizeof(struct student));
+            printf("\n Enter name,sem,usn,branch and phone no \n");
+            scanf("%s %s %s %s %s",&temp->name,&temp->sem,
+                           &temp->usn,&temp->branch,&temp->phone);
+                                   temp->link=NULL;
+                                     if(first==NULL)
+               {
+                first=temp;
+                break;
+               }
+                cur=first;
+                while(cur->link!=NULL)
+                cur=cur->link;
+                
+                cur->link=temp;
+                break;
+       case 3:if(first==NULL)
+               {
+                printf("\n List is empty \n");
+                break;
+               }
+               temp=first;
+               printf("\n First student details in the list is deleted\n");
+               first=first->link;
+               free(temp);
+               break;
+
+       case 4:if(first==NULL)
+               {
+                printf("\n List is empty \n");
+                break;
+               }	
+               if(first->link==NULL)
+               {
+                printf(" List contains one student details,that is deleted");
+                first=NULL;
+                break;
+               }
+
+               prev=NULL; 
+               cur=first;
+               while(cur->link!=NULL)
+                {
+                  prev=cur;
+                  cur=cur->link;
+                }  
+               prev->link=NULL;
+               printf("\n Last student details in the list is deleted \n");
+               free(cur);
+               break;
+              
+                               case 5:c=0;
+               if(first==NULL)
+               {
+                printf("\n list is empty \n");
+                break;
+               }
+               
+               printf("\n The contents of linked list are \n");
+               printf("name \t\tsem\t\t\tusn\t\t branch\t\t phone no ");
+               printf("......................................................................\n");
+               temp=first;
+               while(temp!=NULL)
+               {
+                printf("%-20s %-20s %-20s %-20s %-20s", temp->name, temp->sem,temp->usn, ->branch,temp->phone);
+printf("\n");
+                temp=temp->link;
+                c++;
+               }
+               printf("\n");
+               printf("\n number of students= %d \n",c);
+               break;
+                             case 6:exit(0);
+
+                        }
+           }
+}
+
