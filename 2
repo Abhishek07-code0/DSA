@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+char str[100], pat[25], rep[25] ,res[25]; 
+int i=0, j=0, k=0, l=0, ls=0, lp=0, lr=0, exist=0;
+
+void read( );
+void match( );
+
+
+void main( )
+{
+   read( );
+   match( );
+}
+
+
+void read( )
+{
+    printf("\n Enter main string\n");
+    scanf("%s",str);
+
+    printf("\n Enter pattern string\n");
+    scanf("%s",pat);
+
+    printf("\n Enter Replace string\n");
+    scanf("%s",rep);    
+}
+
+
+void match( )
+{
+   while(str[ls]!='\0')
+     ls++;
+   while(pat[lp]!='\0')
+     lp++;
+   while(rep[lr]!='\0')
+     lr++;
+while(i<=ls-lp)
+   {
+     j=0;  
+     while(j<lp && pat[j]==str[i+j])
+       j++;
+     
+       if(j==lp)
+         {
+             exist=1;
+             while(l<i)
+              res[k++]=str[l++];
+             l=0;
+             while(l<lr)
+             res[k++]=rep[l++];
+
+             i=i+lp;
+             l=i;
+         }
+       else
+        i++;
+  }
+     if(exist==0)
+      {
+       printf("\n Pattern does not exist \n");
+       exit(0);
+      }
+
+   while(l<ls)
+   res[k++]=str[l++];
+   res[k]='\0';
+   printf("\n The final string after replacing is %s \n",res);
+}
+
